@@ -1,17 +1,19 @@
+<!DOCTYPE html>
 <?php
 require_once 'vendor/autoload.php';
 
 use Element\ElementFactory;
 
-$elFactory = new ElementFactory();
-$div = $elFactory->make('div');
-
+$div = ElementFactory::make('div');
 $div['class'] = ['red', 'blue', 'green'];
 $div['class'][] = 'yellow';
 $div['id'] = 'thing';
-$div['class'] = 'red';
-$div['class'][] = 'blue';
-
-unset($div['class'][1]);
 
 echo $div;
+print_r($div['class']);
+
+$li = ElementFactory::make('li');
+$li['class'] = 'wild snowy blue';
+
+echo $li;
+print_r($li['class']);

@@ -80,10 +80,6 @@ class Element implements \ArrayAccess {
 		return $this->content;
 	}
 
-	public function __toString() : string {
-		return $this->openTag() . $this->content() . $this->closeTag();
-	}
-
 	/* ArrayAccess Methods */
 	public function offsetExists($name) : bool {
 		return isset($this->attributes[$name]);
@@ -99,5 +95,9 @@ class Element implements \ArrayAccess {
 
 	public function offsetSet($name, $value) : void {
 		$this->attributes[$name] = $value;
+	}
+
+	public function __toString() : string {
+		return $this->openTag() . $this->content() . $this->closeTag() . "\n";
 	}
 }
