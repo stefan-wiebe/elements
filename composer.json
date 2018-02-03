@@ -1,5 +1,5 @@
 {
-    "name": "stefan-wiebe/element",
+    "name": "stefan-wiebe/elements",
     "type": "library",
     "authors": [
         {
@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Element\\": "src/"
+            "Elements\\": "src/"
         }
     }
 }

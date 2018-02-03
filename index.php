@@ -2,7 +2,7 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Element\Element;
+use Elements\Element;
 
 $div = Element::withClasses('div', ['red', 'blue', 'green'])->addContent('hi');
 $div['class'][] = 'yellow';

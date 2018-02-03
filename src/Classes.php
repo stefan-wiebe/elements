@@ -1,5 +1,5 @@
 <?php
-namespace Element;
+namespace Elements;
 
 /**
  * Class for element classes.
