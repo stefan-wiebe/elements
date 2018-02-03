@@ -8,6 +8,10 @@ class Element implements \ArrayAccess {
 
 	private $omitsClosingTag;
 
+	const VOID_ELEMENTS = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img',
+						   'input', 'link', 'meta', 'param', 'source', 'track',
+						   'wbr'];
+
 	public function __construct(String $tag, array $attributes = array(), array $content = array()) {
 		$this->setTag($tag);
 		$this->setAttributes($attributes);
@@ -26,6 +30,8 @@ class Element implements \ArrayAccess {
 	public function closeTag() : string {
 		if (!$this->omitsClosingTag) {
 			return '</' . $this->tag . '>';
+		} else {
+			return '';
 		}
 	}
 
@@ -38,6 +44,10 @@ class Element implements \ArrayAccess {
 	}
 
 	public function setTag(string $tag) : void {
+		if (in_array($tag, self::VOID_ELEMENTS)) {
+			$this->setOmitsClosingTag();
+		}
+
 		$this->tag = $tag;
 	}
 
@@ -48,7 +58,7 @@ class Element implements \ArrayAccess {
 	/**
 	 * Sets whether to omit the closing tag when outputting this element.
 	 */
-	public function setOmitsClosingTag(bool $omitsClosingTag = false) : void {
+	public function setOmitsClosingTag(bool $omitsClosingTag = true) : void {
 		$this->omitsClosingTag = $omitsClosingTag;
 	}
 

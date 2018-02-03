@@ -1,10 +1,10 @@
 {
-    "name": "stefan/element",
+    "name": "stefan-wiebe/element",
     "type": "library",
     "authors": [
         {
             "name": "Stefan Wiebe",
-            "email": "3istee@abwesend.de"
+            "email": "stefan@wiebe.tk"
         }
     ],
     "require": {
