@@ -9,34 +9,35 @@ class Attributes implements \ArrayAccess {
 	}
 
 	/**
-	 * Adds an attibute while respecting already existing values for classes.
-	 * @param string $name  The name of the attribute
-	 * @param mixed  $value The value of the attribute
+	 * Initializes the internal attribute-array.
+	 * Can be used to clear all attributes.
 	 */
-	public function put(string $name, $value) : void {
-		switch ($name) {
-			case 'class':
-				if (is_array($value)) {
-					$this->attributes['class'] = $value;
-				} elseif (is_string($value)) {
-					$this->attributes['class'] = explode(' ', $value);
-				}
-				break;
-			default:
-				$this->attributes[$name] = $value;
-				break;
-		}
+	public function initializeAttributes() : void {
+		$this->attributes = array();
+		$this->attributes['class'] = new Classes();
+		$this->attributes['style'] = new Styles();
 	}
 
-	/**
-	 * Clears this element's attributes, replacing it with an empty array.
-	 */
-	public function clear() : void {
-		$this->attributes = array();
+	public function setAttribute($attribute, $value) : void {
+		switch ($attribute):
+			case 'class':
+				$this->attributes['class']->setClasses($value);
+			break;
+			case 'style':
+				$this->attributes['style']->setStyles($value);
+			break;
+			default:
+				$this->attributes[$attribute] = $value;
+			break;
+		endswitch;
 	}
 
 	public function setAttributes(array $attributes) : void {
-		$this->attributes = $attributes;
+		$this->initializeAttributes();
+
+		foreach($attributes as $attribute => $value) {
+			$this->setAttribute($attribute, $value);
+		}
 	}
 
 	public function getAttributes() : array {
@@ -44,24 +45,19 @@ class Attributes implements \ArrayAccess {
 	}
 
 	public function __toString() {
-		$string = ' ';
-
-		$i = 0;
-		$length = count($this->attributes);
+		$string = '';
 
 		foreach ($this->attributes as $attribute => $value) {
-			$string .= $attribute . '="';
+			if (!empty((string) $value)) {
+				$string .= ' ' . $attribute . '="';
 
-			if (is_array($value)) {
-				$string .= implode(' ', $value);
-			} else {
-				$string .= $value;
-			}
+				if (is_array($value)) {
+					$string .= implode(' ', $value);
+				} else {
+					$string .= $value;
+				}
 
-			$string .= '"';
-
-			if (++$i !== $length) {
-				$string .= ' ';
+				$string .= '"';
 			}
 		}
 
@@ -81,7 +77,7 @@ class Attributes implements \ArrayAccess {
 		return $this->attributes[$name];
 	}
 
-	public function offsetSet($name, $value) : void {
-		$this->put($name, $value);
+	public function offsetSet($attribute, $value) : void {
+		$this->setAttribute($attribute, $value);
 	}
 }
