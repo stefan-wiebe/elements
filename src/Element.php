@@ -12,10 +12,14 @@ class Element implements \ArrayAccess {
 						   'input', 'link', 'meta', 'param', 'source', 'track',
 						   'wbr'];
 
-	public function __construct(String $tag, array $attributes = array(), array $content = array()) {
+	public function __construct(string $tag, array $attributes = array(), array $content = array()) {
 		$this->setTag($tag);
 		$this->setAttributes($attributes);
 		$this->setContent($content);
+	}
+
+	public static function withClasses(string $tag, $classes) : self {
+		return new Element($tag, ['class' => $classes]);
 	}
 
 	public function openTag() : string {
@@ -35,20 +39,22 @@ class Element implements \ArrayAccess {
 		}
 	}
 
-	public function addContent($content) : void {
+	public function addContent($content) : self {
 		if (!is_array($this->content)) {
 			$this->content = array($this->content);
 		}
 
 		$this->content[] = $content;
+		return $this;
 	}
 
-	public function setTag(string $tag) : void {
+	public function setTag(string $tag) : self {
 		if (in_array($tag, self::VOID_ELEMENTS)) {
 			$this->setOmitsClosingTag();
 		}
 
 		$this->tag = $tag;
+		return $this;
 	}
 
 	public function getTag() : string {
@@ -58,8 +64,9 @@ class Element implements \ArrayAccess {
 	/**
 	 * Sets whether to omit the closing tag when outputting this element.
 	 */
-	public function setOmitsClosingTag(bool $omitsClosingTag = true) : void {
+	public function setOmitsClosingTag(bool $omitsClosingTag = true) : self {
 		$this->omitsClosingTag = $omitsClosingTag;
+		return $this;
 	}
 
 	/**
@@ -70,20 +77,23 @@ class Element implements \ArrayAccess {
 		return $this->omitsClosingTag;
 	}
 
-	public function setAttributes(array $attributes) : void {
+	public function setAttributes(array $attributes) : self {
 		if (!isset($this->attributes)) {
 			$this->attributes = new Attributes($attributes);
 		} else {
 			$this->attributes->setAttributes($attributes);
 		}
+
+		return $this;
 	}
 
 	public function getAttributes() : Attributes {
 		return $this->attributes;
 	}
 
-	public function setContent(array $content) : void {
+	public function setContent(array $content) : self {
 		$this->content = $content;
+		return $this;
 	}
 
 	public function getContent() : array {

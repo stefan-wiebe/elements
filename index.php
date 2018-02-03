@@ -2,10 +2,9 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Element\ElementFactory;
+use Element\Element;
 
-$div = ElementFactory::make('div');
-$div['class'] = ['red', 'blue', 'green'];
+$div = Element::withClasses('div', ['red', 'blue', 'green'])->addContent('hi');
 $div['class'][] = 'yellow';
 $div['id'] = 'thing';
 $div['style'] = 'display: 	 block;
@@ -15,8 +14,7 @@ $div['style'] = 'display: 	 block;
 echo $div;
 print_r($div['class']);
 
-$li = ElementFactory::make('li');
-$li['class'] = 'wild snowy blue';
+$li = Element::withClasses('li', 'wild snowy blue');
 $li['style']['display'] = 'block';
 $li['style']['height'] = '100px';
 $li['style']['background-color'] = 'blue !important';
@@ -24,7 +22,7 @@ $li['style']['background-color'] = 'blue !important';
 echo $li;
 print_r($li['class']);
 
-$img = ElementFactory::make('img');
+$img = new Element('img');
 $img['src'] = 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg';
 $img['width'] = '100%';
 
