@@ -1,5 +1,5 @@
 <?php
-namespace Element;
+namespace Elements;
 
 class Element implements \ArrayAccess {
 	private $tag;

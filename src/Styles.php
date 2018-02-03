@@ -1,5 +1,5 @@
 <?php
-namespace Element;
+namespace Elements;
 
 class Styles implements \ArrayAccess {
 	private $styles;

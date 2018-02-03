@@ -1,5 +1,5 @@
 <?php
-namespace Element;
+namespace Elements;
 
 class Attributes implements \ArrayAccess {
 	private $attributes;
