@@ -26,5 +26,6 @@ print_r($li['class']);
 
 $img = ElementFactory::make('img');
 $img['src'] = 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg';
+$img['width'] = '100%';
 
 echo $img;

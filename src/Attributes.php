@@ -45,24 +45,19 @@ class Attributes implements \ArrayAccess {
 	}
 
 	public function __toString() {
-		$string = ' ';
-
-		$i = 0;
-		$length = count($this->attributes);
+		$string = '';
 
 		foreach ($this->attributes as $attribute => $value) {
-			$string .= $attribute . '="';
+			if (!empty((string) $value)) {
+				$string .= ' ' . $attribute . '="';
 
-			if (is_array($value)) {
-				$string .= implode(' ', $value);
-			} else {
-				$string .= $value;
-			}
+				if (is_array($value)) {
+					$string .= implode(' ', $value);
+				} else {
+					$string .= $value;
+				}
 
-			$string .= '"';
-
-			if (++$i !== $length) {
-				$string .= ' ';
+				$string .= '"';
 			}
 		}
 
