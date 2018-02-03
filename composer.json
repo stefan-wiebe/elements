@@ -1,6 +1,9 @@
 {
     "name": "stefan-wiebe/elements",
+    "description": "A simple PHP-library for building HTML-Elements.",
     "type": "library",
+    "keywords": ["html elements", "html", "dom"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Stefan Wiebe",
