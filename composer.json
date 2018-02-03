@@ -1,0 +1,17 @@
+{
+    "name": "stefan/element",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Stefan Wiebe",
+            "email": "3istee@abwesend.de"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Element\\": "src/"
+        }
+    }
+}
