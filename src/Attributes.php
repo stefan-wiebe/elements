@@ -15,12 +15,16 @@ class Attributes implements \ArrayAccess {
 	public function initializeAttributes() : void {
 		$this->attributes = array();
 		$this->attributes['class'] = new Classes();
+		$this->attributes['style'] = new Styles();
 	}
 
 	public function setAttribute($attribute, $value) : void {
 		switch ($attribute):
 			case 'class':
 				$this->attributes['class']->setClasses($value);
+			break;
+			case 'style':
+				$this->attributes['style']->setStyles($value);
 			break;
 			default:
 				$this->attributes[$attribute] = $value;
